@@ -18,18 +18,23 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
 # testing
 # Load tokenizer and model
-print("Loading tokenizer...")
+# print("Loading tokenizer...")
 tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-large")
+# print(tokenizer)
 
-print("Loading model...")
+# print("Loading model...")
 model = AutoModelForCausalLM.from_pretrained("microsoft/DialoGPT-large")
+# print(model)
 
 # Create chatbot pipeline
-print("Creating chatbot pipeline...")
-chatbot = pipeline("text-generation", model=model, tokenizer=tokenizer)
+# print("Creating chatbot pipeline...")
+chatbot = pipeline("text-generation", model=model, tokenizer=tokenizer, max_length=50)
+# print(chatbot)
 
 # Test chatbot with a default input
 user_input = "Hello"
-print("User input:", user_input)
-bot_response = chatbot(user_input)[0]['generated_text']
-print("Bot response:", bot_response)
+# print("User input:", user_input)
+bot_response = chatbot(user_input)#[0]['generated_text']
+for reply in bot_response:
+    print(reply['generated_text'])
+# print("Bot response:", bot_response)
